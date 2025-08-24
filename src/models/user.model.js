@@ -15,6 +15,4 @@ export const User = sequelize.define("user_model", {
     password: {
         type: DataTypes.STRING(100), allowNull: false
     }
-},{
-    paranoid: true
 });

@@ -2,7 +2,7 @@
 GET http://localhost:4000/api/profile
 
 #### DELETE
-DELETE http://localhost:4000/api/profile/2
+DELETE http://localhost:4000/api/users/1
 
 
 #### POST USER

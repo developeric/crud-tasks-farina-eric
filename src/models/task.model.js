@@ -25,7 +25,8 @@ export const Task = sequelize.define(
     timestamps: false,
   })
 {
-  Task.belongsTo(Profile,{foreignKey: "profile_id"
+  Task.belongsTo(Profile,{foreignKey: "profile_id",
+    onDelete:"CASCADE"
   });
 
   Profile.hasMany(Task,{foreignKey: "profile_id"

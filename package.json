@@ -2,6 +2,7 @@
   "dependencies": {
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "express-validator": "^7.2.1",
     "mysql2": "^3.14.3",
     "sequelize": "^6.37.7"
   },
@@ -9,7 +10,6 @@
   "version": "1.0.0",
   "main": "app.js",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
     "dev": "node --watch app.js"
   },
@@ -24,5 +24,6 @@
     "url": "https://github.com/developeric/aaaaaa/issues"
   },
   "homepage": "https://github.com/developeric/aaaaaa#readme",
+  "devDependencies": {},
   "description": ""
 }
