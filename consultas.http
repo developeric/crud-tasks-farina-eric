@@ -1,0 +1,18 @@
+GET http://localhost:4000/api/tasks
+
+#### PUT USERS
+GET  http://localhost:4000/api/users
+
+#### POST 
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+    "name":"Eric",
+    "email": "Eric@gmail.com",
+    "password": "123"
+}
+#### DELETE
+
+DELETE http://localhost:4000/api/users/5
+Content-Type: application/json

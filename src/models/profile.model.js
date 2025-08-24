@@ -19,6 +19,21 @@ export const Profile = sequelize.define("profile_model", {
     timestamps:false
 });
 
-User.hasOne(Profile,{foreignKey: "user_id"})
 
-Profile.belongsTo(User,{foreignKey: "user_id"})
+    Profile.belongsTo(User,{
+        foreignKey: "profile_id",
+        as: "author",
+        onDelete: "CASCADE"
+      })
+
+  User.hasOne(Profile,{foreignKey: "user_id",
+    as: "user"})
+
+    User.addHook("afterDestroy", async(user)=>{
+      const profile = await Profile.findOne({
+        where: {user_id: user.dataValues.id},
+      })
+
+      await profile.destroy()
+
+    });

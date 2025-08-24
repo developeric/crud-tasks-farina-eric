@@ -3,9 +3,9 @@ import { getUser,getUserbyPK,updateUser,deleteUser,createUser } from "../control
 
 export const routerUser = Router();
 
-routerUser.post("/users/",createUser)
+routerUser.post("/users",createUser)
 
-routerUser.get("/users/",getUser)
+routerUser.get("/users",getUser)
 
 routerUser.get("/users/:id",getUserbyPK)
 

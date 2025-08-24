@@ -208,10 +208,9 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const user = await User.destroy({ where: { id: req.params.id } });
-    if (user)
-      return res.status(200).json({ Message: "Se ELIMINÓ con exito el User" });
+    if (user){
+      return res.status(200).json({ Message: "Se ELIMINÓ con exito el User" });}
 
-    return res.status(400).json({ Message: "No se pudo ELIMINAR el User" });
   } catch (error) {
     return res
       .status(500)
