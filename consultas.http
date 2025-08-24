@@ -1,18 +1,62 @@
-GET http://localhost:4000/api/tasks
+#### GET
+GET http://localhost:4000/api/profile
 
-#### PUT USERS
-GET  http://localhost:4000/api/users
+#### DELETE
+DELETE http://localhost:4000/api/profile/2
 
-#### POST 
+
+#### POST USER
 POST http://localhost:4000/api/users
 Content-Type: application/json
 
 {
-    "name":"Eric",
-    "email": "Eric@gmail.com",
-    "password": "123"
+    "name":"Eric Andres Fariña",
+    "email": "EricAndresFariña@gmail.com",
+    "password": "1234567890"
 }
-#### DELETE
 
-DELETE http://localhost:4000/api/users/5
+#### POST PROFILE
+POST http://localhost:4000/api/profile
 Content-Type: application/json
+
+  {
+    "real_name":"Eric Profile",
+    "description":"Perfil 1",
+    "age":18 , 
+    "user_id": 1
+  }
+
+
+#### POST TASK
+POST http://localhost:4000/api/tasks
+Content-Type: application/json
+
+{
+    "title":"Task One",
+    "description":"Es Verdadero",
+    "isComplete":true,
+    "profile_id":1
+}
+
+
+
+###POST LABEL
+POST http://localhost:4000/api/label
+Content-Type: application/json
+
+{
+  "name":"Urgente"
+}
+
+#### POST LABELTASK
+POST http://localhost:4000/api/labeltask
+Content-Type: application/json
+
+{
+  "task_id":1,
+  "label_id":1
+}
+
+
+
+

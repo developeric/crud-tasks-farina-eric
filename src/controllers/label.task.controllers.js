@@ -5,19 +5,20 @@ import { Task } from "../models/task.model.js";
 //create LabelTask
 export const createLabelTask = async (req, res) => {
   try {
-    const labeltaskExist = await LabelTask.findAll({
-      where: { id: req.params.id },
-    });
-    if (labeltaskExist) {
-      return res
-        .status(400)
-        .json({ Message: "Ya existe un labeltask con esta ID" });
-    }
+    // const labeltaskExist = await LabelTask.findAll({
+    //   where: { id: req.params.id },
+    // });
+    // if (labeltaskExist) {
+    //   return res
+    //     .status(400)
+    //     .json({ Message: "Ya existe un labeltask con esta ID" });
+    // }
     const labeltask = await LabelTask.create(req.body);
 
     return res.status(200).json(labeltask);
   } catch (error) {
-    res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE" });
+    res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE"})
+    console.log(error);
   }
 };
 //

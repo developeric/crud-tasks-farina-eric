@@ -70,11 +70,11 @@ export const createUser = async (req, res) => {
     };
 
     //creandoUser
-    const user = User.create({ name, email, password });
+    const user = User.create(req.body);
     if (user) {
       return res.status(200).json({
         Message: "Se ha creado el Usuario",
-        user: { name, email, password },
+        user: { name, email, password }   
       });
     }
 

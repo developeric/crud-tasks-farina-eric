@@ -3,6 +3,7 @@ import { sequelize } from "../config/tasks_users_db.js";
 import { User } from "./user.model.js";
 
 export const Profile = sequelize.define("profile_model", {
+
   real_name: {
     type: DataTypes.STRING,
     unique: true,
@@ -19,21 +20,40 @@ export const Profile = sequelize.define("profile_model", {
     timestamps:false
 });
 
+//Uno a Uno
 
     Profile.belongsTo(User,{
-        foreignKey: "profile_id",
-        as: "author",
+        foreignKey: "user_id",
+        as:"usuario",
         onDelete: "CASCADE"
       })
 
   User.hasOne(Profile,{foreignKey: "user_id",
-    as: "user"})
+    as: "usuario"
+  })
 
-    User.addHook("afterDestroy", async(user)=>{
-      const profile = await Profile.findOne({
-        where: {user_id: user.dataValues.id},
-      })
 
-      await profile.destroy()
 
-    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    // User.addHook("afterDestroy", async(user)=>{
+    //   const profile = await Profile.findOne({
+    //     where: {user_id: user.dataValues.id},
+    //   })
+
+    //   await profile.destroy()
+
+    // });
