@@ -6,14 +6,11 @@ export const createProfile = async (req, res) => {
   try {
     const { real_name, description, age } = req.body;
 
-    if (real_name === null || real_name === "" || real_name === undefined)
-      return res.status(400).json({
-        Message:
-          "El NOMBRE no puede contener parametros Nulos,Vacíos o Indefinidos",
-      });
-
-
-
+    // if (real_name === null || real_name === "" || real_name === undefined)
+    //   return res.status(400).json({
+    //     Message:
+    //       "El NOMBRE no puede contener parametros Nulos,Vacíos o Indefinidos",
+    //   });
     const newProfile = await Profile.create(req.body);
     const profileReturn = await Profile.findByPk(newProfile.id, {
       
@@ -28,8 +25,9 @@ export const createProfile = async (req, res) => {
       ],
     });
 
-  
     return res.status(201).json(profileReturn);
+
+    
   } catch (error) {
     res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE" });
     console.log("Se ha Ingresado al cath", error);

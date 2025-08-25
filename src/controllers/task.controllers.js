@@ -7,7 +7,7 @@ export const taskCreate = async (req, res) => {
   try {
     const { title, description, isComplete } = req.body;
 
-    //title
+  
     const titleExiste = await Task.findOne({ where: { title } });
     if (titleExiste) {
       return res
@@ -15,18 +15,18 @@ export const taskCreate = async (req, res) => {
         .json({ Message: "No pueden haber dos titulos iguales" });
     }
 
-    if (title === null || title === "" || title === undefined)
-      return res.status(400).json({
-        Message:
-          "El TITULO no puede contener parametros Nulos,Vacíos o Indefinidos",
-      });
+    // if (title === null || title === "" || title === undefined)
+    //   return res.status(400).json({
+    //     Message:
+    //       "El TITULO no puede contener parametros Nulos,Vacíos o Indefinidos",
+    //   });
 
       //isComplete
-    if (typeof isComplete !== "boolean") {
-      return res
-        .status(400)
-        .json({ Message: "El valor tiene que ser Boolean" });
-    }
+    // if (typeof isComplete !== "boolean") {
+    //   return res
+    //     .status(400)
+    //     .json({ Message: "El valor tiene que ser Boolean" });
+    // }
 
     const task = await Task.create(req.body);
     if (task) {

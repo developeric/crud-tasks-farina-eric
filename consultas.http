@@ -10,9 +10,9 @@ POST http://localhost:4000/api/users
 Content-Type: application/json
 
 {
-    "name":"Eric Andres Fariña",
+    "name":"Eric Andres",
     "email": "EricAndresFariña@gmail.com",
-    "password": "1234567890"
+    "password": "123123"
 }
 
 #### POST PROFILE
@@ -35,7 +35,7 @@ Content-Type: application/json
     "title":"Task One",
     "description":"Es Verdadero",
     "isComplete":true,
-    "profile_id":1
+    "profile_id":2
 }
 
 

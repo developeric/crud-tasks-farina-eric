@@ -6,11 +6,11 @@ export const createLabel = async (req, res) => {
     const { name } = req.body;
 
 
-       if (name === null || name === "" || name === undefined)
-      return res.status(400).json({
-        Message:
-          "El NOMBRE no puede contener parametros Nulos,Vacíos o Indefinidos",
-      });
+      //  if (name === null || name === "" || name === undefined)
+      // return res.status(400).json({
+      //   Message:
+      //     "El NOMBRE no puede contener parametros Nulos,Vacíos o Indefinidos",
+      // });
 
     // const labelExist = await Label.findAll({where: { name: req.params.name}});
     // if (labelExist) {

@@ -10,6 +10,7 @@ export const Label = sequelize.define(
     },
   },
   {
-    paranoid: false,
-  }
-);
+    paranoid: true,
+    createdAt:false,
+    updatedAt:false
+  } );  
