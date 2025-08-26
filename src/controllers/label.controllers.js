@@ -60,3 +60,33 @@ export const getLabelByPK = async (req, res) => {
     console.log("Se ha Ingresado al cath", error);
   }
 };
+
+
+
+
+//update Label
+export const updateLabel = async (req, res) => {
+  const label = Label.update(req.body, { where: { id: req.params.id } });
+
+  if (label) {
+    return res.status(201).json({ Message: "Se actualizó la LABEL" });
+  }
+};
+
+
+
+
+//delete Label
+export const deleteLabel = async (req, res) => {
+  try {
+    const label = await Label.destroy({ where: { id: req.params.id } });
+    if (label)
+      return res
+        .status(200)
+        .json({ Message: "Se ELIMINÖ la label"});
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ Message: "Error por parte del CATCH al Actualizar" });
+  }
+};

@@ -13,21 +13,18 @@ export const createProfile = async (req, res) => {
     //   });
     const newProfile = await Profile.create(req.body);
     const profileReturn = await Profile.findByPk(newProfile.id, {
-      
       include: [
         {
           model: User,
-          as :"usuario"
-          ,attributes: {
-        exclude: ["password"],
-      },
+          as: "usuario",
+          attributes: {
+            exclude: ["password"],
+          },
         },
       ],
     });
 
     return res.status(201).json(profileReturn);
-
-    
   } catch (error) {
     res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE" });
     console.log("Se ha Ingresado al cath", error);
@@ -89,6 +86,21 @@ export const getProfileByPK = async (req, res) => {
   }
 };
 
+
+
+//ActualizarProfile
+export const updateProfile = async (req, res) => {
+  const profile = User.update(req.body, { where: { id: req.params.id } });
+
+  if (profile) {
+    return res.status(201).json({ Message: "Se actualizó el PROFILE" });
+  }
+};
+
+
+
+
+
 //eliminarProfile
 export const deleteProfile = async (req, res) => {
   try {
@@ -101,7 +113,7 @@ export const deleteProfile = async (req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ Message: "Error por parte del servidor al ELIMINAR el User" });
+      .json({ Message: "Error por parte del servidor al ELIMINAR el PROFILE" });
   }
 };
 //

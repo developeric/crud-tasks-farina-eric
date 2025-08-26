@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import { Label } from "../models/label.model.js";
 import { LabelTask } from "../models/label.task.model.js";
 import { Task } from "../models/task.model.js";
@@ -17,7 +18,7 @@ export const createLabelTask = async (req, res) => {
 
     return res.status(200).json(labeltask);
   } catch (error) {
-    res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE"})
+    res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE" });
     console.log(error);
   }
 };
@@ -57,5 +58,38 @@ export const getLabelTaskByPK = async (req, res) => {
   } catch (error) {
     res.status(500).json({ Message: "Se ha ingresado al Catch del GET" });
     console.log("Se ha Ingresado al cath", error);
+  }
+};
+
+
+//update LabelTask
+export const updateLabelTask = async (req, res) => {
+  try {
+    const labeltask = await LabelTask.update({ where: { id: req.params.id } });
+    if (labeltask)
+      return res
+        .status(200)
+        .json({ Message: "Se actualizó la LabelTask", labeltask });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ Message: "Error por parte del CATCH al Actualizar" });
+  }
+};
+
+
+
+//delete LabelTask
+export const deleteLabelTask = async (req, res) => {
+  try {
+    const labeltask = await LabelTask.destroy({ where: { id: req.params.id } });
+    if (labeltask)
+      return res
+        .status(200)
+        .json({ Message: "Se ELIMINÖ la LabelTask"});
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ Message: "Error por parte del CATCH al Actualizar" });
   }
 };

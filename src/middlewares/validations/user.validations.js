@@ -18,5 +18,31 @@ export const createUserValidator = [
     .withMessage("Su contraseña no puede estar vacía")
     .isLength({ min: 1, max: 100 })
     .withMessage(
-      "La contraseña tiene que ser mayor a 1 caracter y menor a 100"),
+      "La contraseña tiene que ser mayor a 1 caracter y menor a 100"
+    ),
+];
+
+export const updateUserValidator = [
+  body("name")
+    .optional()
+    .notEmpty()
+    .withMessage(`No puede estar vacío`)
+    .isString()
+    .withMessage(`Tiene que ser un dato tipo String`),
+
+  body("email")
+    .optional()
+    .isEmail()
+    .withMessage(`El email no es valido`)
+    .notEmpty()
+    .withMessage(`No puede estar vacío`),
+
+  body("password")
+    .optional()
+    .notEmpty()
+    .withMessage("Su contraseña no puede estar vacía")
+    .isLength({ min: 1, max: 100 })
+    .withMessage(
+      "La contraseña tiene que ser mayor a 1 caracter y menor a 100"
+    ),
 ];
