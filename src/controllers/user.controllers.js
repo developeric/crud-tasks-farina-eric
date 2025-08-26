@@ -72,9 +72,8 @@ export const createUser = async (req, res) => {
     //creandoUser
     const user = User.create(req.body);
     if (user) {
-      return res.status(200).json({
-        Message: "Se ha creado el Usuario",
-        user,
+      return res.status(201).json({
+        Message: "Se ha creado el Usuario",user
       });
     }
 
@@ -191,7 +190,6 @@ export const updateUser = async (req, res) => {
     if (user) {
       return res.status(201).json({ Message: "Se actualizó el Personaje" });
     }
-
   } catch (error) {
     Message: "Error al crear el Personaje por parte del servidor";
   }

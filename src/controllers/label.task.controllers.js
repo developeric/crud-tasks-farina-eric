@@ -15,8 +15,9 @@ export const createLabelTask = async (req, res) => {
     //     .json({ Message: "Ya existe un labeltask con esta ID" });
     // }
     const labeltask = await LabelTask.create(req.body);
-
-    return res.status(200).json(labeltask);
+    if (labeltask) {
+      return res.status(201).json({Message:"Se ha creado la LabelTask",labeltask});
+    }
   } catch (error) {
     res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE" });
     console.log(error);
@@ -61,7 +62,6 @@ export const getLabelTaskByPK = async (req, res) => {
   }
 };
 
-
 //update LabelTask
 export const updateLabelTask = async (req, res) => {
   try {
@@ -77,16 +77,12 @@ export const updateLabelTask = async (req, res) => {
   }
 };
 
-
-
 //delete LabelTask
 export const deleteLabelTask = async (req, res) => {
   try {
     const labeltask = await LabelTask.destroy({ where: { id: req.params.id } });
     if (labeltask)
-      return res
-        .status(200)
-        .json({ Message: "Se ELIMINÖ la LabelTask"});
+      return res.status(200).json({ Message: "Se ELIMINÖ la LabelTask" });
   } catch (error) {
     return res
       .status(500)

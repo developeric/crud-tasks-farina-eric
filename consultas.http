@@ -1,8 +1,20 @@
 #### GET
 GET http://localhost:4000/api/profile
 
+###PUT
+PUT http://localhost:4000/api/profile/1
+Content-Type: application/json
+
+{
+    "real_name":"Eric Profile False",
+    "description":"Perfil 1",
+    "age":18 , 
+    "user_id": 1
+}
+
 #### DELETE
 DELETE http://localhost:4000/api/users/1
+
 
 
 #### POST USER

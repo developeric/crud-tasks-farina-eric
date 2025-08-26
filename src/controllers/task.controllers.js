@@ -7,15 +7,7 @@ export const taskCreate = async (req, res) => {
   try {
     const { title, description, isComplete } = req.body;
 
-  
-    const titleExiste = await Task.findOne({ where: { title } });
-    if (titleExiste) {
-      return res
-        .status(400)
-        .json({ Message: "No pueden haber dos titulos iguales" });
-    }
-
-    // if (title === null || title === "" || title === undefined)
+        // if (title === null || title === "" || title === undefined)
     //   return res.status(400).json({
     //     Message:
     //       "El TITULO no puede contener parametros Nulos,Vacíos o Indefinidos",
@@ -27,15 +19,22 @@ export const taskCreate = async (req, res) => {
     //     .status(400)
     //     .json({ Message: "El valor tiene que ser Boolean" });
     // }
+  
+    const titleExiste = await Task.findOne({ where: { title } });
+    if (titleExiste) {
+      return res
+        .status(400)
+        .json({ Message: "No pueden haber dos titulos iguales" });
+    }
 
     const task = await Task.create(req.body);
     if (task) {
       return res
         .status(200)
-        .json({ Message: "Se pudo crear el personaje", task });
+        .json({ Message: "Se pudo crear la TASK", task });
     }
   } catch (error) {
-    Message: "Se ha ingresado al CATCH";
+    return res.status(500).json({Message: "Se ha ingresado al CATCH"});
     console.log(error);
   }
 };

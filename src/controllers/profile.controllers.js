@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import { Profile } from "../models/profile.model.js";
 import { User } from "../models/user.model.js";
 
@@ -89,13 +90,19 @@ export const getProfileByPK = async (req, res) => {
 
 
 //ActualizarProfile
-export const updateProfile = async (req, res) => {
-  const profile = User.update(req.body, { where: { id: req.params.id } });
+ export const updateProfile = async (req, res) => {
+try {
+  const profile = await Profile.update({ where:{id: req.params.id}});
 
   if (profile) {
     return res.status(201).json({ Message: "Se actualizó el PROFILE" });
   }
-};
+}catch (error) {
+  return res.status(500).json({Message:"Internal Error Server Update"})
+  
+}
+ };
+
 
 
 
