@@ -1,7 +1,15 @@
-import { body } from "express-validator";
+import { body,param } from "express-validator";
+import { Task } from "../../models/task.model.js";
+
 
 export const createTaskValidator = [
   body("title")
+      .custom(async (value) => {
+        const existente = await User.findOne({ where: { title: value } });
+        if (existente) {
+          throw new Error("Este TITLE ya esta en uso");
+        }
+      })
     .notEmpty()
     .withMessage("Este campo no puede estar vacío")
     .isString()
@@ -21,6 +29,13 @@ export const createTaskValidator = [
 ];
 
 export const updateTaskValidator = [
+    param("id")
+    .isInt()
+    .withMessage("Tiene que ser un entero")
+    .custom(async (value) => {
+      const user = await Task.findByPk(value);
+      if (!user) throw new Error("El user no se ha podido encontrar");
+    }),
   body("title")
     .optional()
     .notEmpty()
@@ -41,4 +56,24 @@ export const updateTaskValidator = [
     .withMessage("El valor tiene que ser Booleano")
     .notEmpty()
     .withMessage("No puede estar vacío"),
+];
+
+export const findByPKTaskValidator = [
+    param("id")
+      .isInt()
+      .withMessage("Tiene que ser un entero")
+      .custom(async (value) => {
+        const task = await Task.findByPk(value);
+        if (!task) throw new Error("El TASK no se ha podido encontrar");
+      }),
+];
+
+export const deleteTaskValidator = [
+    param("id")
+      .isInt()
+      .withMessage("Tiene que ser un entero")
+      .custom(async (value) => {
+        const task = await Task.findByPk(value);
+        if (!task) throw new Error("El TASK no se ha podido encontrar");
+      }),
 ];

@@ -73,7 +73,7 @@ export const createUser = async (req, res) => {
     const user = User.create(req.body);
     if (user) {
       return res.status(201).json({
-        Message: "Se ha creado el Usuario",user
+        Message: "Se ha creado el Usuario",
       });
     }
 

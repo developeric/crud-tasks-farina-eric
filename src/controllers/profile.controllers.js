@@ -90,15 +90,10 @@ export const getProfileByPK = async (req, res) => {
 
 
 //ActualizarProfile
-<<<<<<< HEAD
+
  export const updateProfile = async (req, res) => {
 try {
   const profile = await Profile.update({ where:{id: req.params.id}});
-=======
-export const updateProfile = async (req, res) => {
-  const profile = Profile.update(req.body, { where: { id: req.params.id } });
->>>>>>> validaciones
-
   if (profile) {
     return res.status(201).json({ Message: "Se actualizó el PROFILE" });
   }
@@ -112,7 +107,7 @@ export const updateProfile = async (req, res) => {
 
 
 
-
+ //
 //eliminarProfile
 export const deleteProfile = async (req, res) => {
   try {
