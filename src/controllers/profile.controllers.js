@@ -1,30 +1,31 @@
+import { where } from "sequelize";
 import { Profile } from "../models/profile.model.js";
 import { User } from "../models/user.model.js";
+
 //crear Profile
 export const createProfile = async (req, res) => {
   try {
-    const { real_real_name, age, user_id } = req.body;
-    const userExist = await User.findByPk(user_id);
+    const { real_name, description, age } = req.body;
 
-    //
-    const profileExist = await Profile.findAll({
-      where: { id: req.params.id },
+    // if (real_name === null || real_name === "" || real_name === undefined)
+    //   return res.status(400).json({
+    //     Message:
+    //       "El NOMBRE no puede contener parametros Nulos,Vacíos o Indefinidos",
+    //   });
+    const newProfile = await Profile.create(req.body);
+    const profileReturn = await Profile.findByPk(newProfile.id, {
+      include: [
+        {
+          model: User,
+          as: "usuario",
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+      ],
     });
-    if (profileExist) {
-      return res
-        .status(400)
-        .json({ Message: "Ya existe un usuario con esta ID" });
-    }
-    //
 
-        if (real_name === null || real_name === "" || real_name === undefined)
-      return res.status(400).json({
-        Message:
-          "El NOMBRE no puede contener parametros Nulos,Vacíos o Indefinidos",
-      });
-
-    const profile = await Profile.create(req.body);
-    return res.status(200).json(profile);
+    return res.status(201).json(profileReturn);
   } catch (error) {
     res.status(500).json({ Message: "Se ha ingresado al Catch del CREATE" });
     console.log("Se ha Ingresado al cath", error);
@@ -39,15 +40,31 @@ export const getProfile = async (req, res) => {
       attributes: {
         exclude: ["user_id"],
       },
+      include: [
+        {
+          model: User,
+          as: "usuario",
+          attributes: {
+            exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
+          },
+        },
+      ],
     });
+
+    if (profile) {
+      return res
+        .status(200)
+        .json({ Message: "Se obtuvieron los Perfiles", profile });
+    }
+
     if (!profile) {
       return res
         .status(404)
         .json({ Message: "No se pudo encontrar al PROFILE" });
     }
-    return res.status(200).json(profile);
   } catch (error) {
     res.status(500).json({ Message: "Se ha ingresado al Catch del GET" });
+    console.log(error);
   }
 };
 //
@@ -55,11 +72,7 @@ export const getProfile = async (req, res) => {
 //Obtener Profile by PK
 export const getProfileByPK = async (req, res) => {
   try {
-    const profile = await Profile.findByPk(req.params.id, {
-      attributes: {
-        exclude: ["user_id"],
-      },
-    });
+    const profile = await Profile.findByPk();
 
     if (!profile) {
       return res
@@ -73,3 +86,41 @@ export const getProfileByPK = async (req, res) => {
     console.log("Se ha Ingresado al cath", error);
   }
 };
+
+
+
+//ActualizarProfile
+ export const updateProfile = async (req, res) => {
+try {
+  const profile = await Profile.update({ where:{id: req.params.id}});
+
+  if (profile) {
+    return res.status(201).json({ Message: "Se actualizó el PROFILE" });
+  }
+}catch (error) {
+  return res.status(500).json({Message:"Internal Error Server Update"})
+  
+}
+ };
+
+
+
+
+
+
+//eliminarProfile
+export const deleteProfile = async (req, res) => {
+  try {
+    const profile = await Profile.destroy({ where: { id: req.params.id } });
+    if (profile) {
+      return res
+        .status(200)
+        .json({ Message: "Se ELIMINÓ con exito el PROFILE" });
+    }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ Message: "Error por parte del servidor al ELIMINAR el PROFILE" });
+  }
+};
+//

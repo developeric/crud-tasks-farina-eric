@@ -1,6 +1,6 @@
-import { User } from "./user.model.js"
 import { sequelize } from "../config/tasks_users_db.js";
 import { DataTypes } from "sequelize";
+import { Profile } from "./profile.model.js";
 
 //                                      TASK                                             //
 
@@ -23,8 +23,14 @@ export const Task = sequelize.define(
   },
   {
     timestamps: false,
-  }
-);
+  })
+{
+  Task.belongsTo(Profile,{foreignKey: "profile_id",
+    onDelete:"CASCADE"
+  });
 
-Task.belongsTo(User, { foreignKey: "user_id" });
-User.hasMany(Task, { foreignKey: "user_id" });
+  Profile.hasMany(Task,{foreignKey: "profile_id"
+  })
+}
+
+

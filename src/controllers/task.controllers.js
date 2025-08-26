@@ -1,12 +1,25 @@
+import { Profile } from "../models/profile.model.js";
 import { Task } from "../models/task.model.js";
 import { User } from "../models/user.model.js";
 
 //CrearTask
 export const taskCreate = async (req, res) => {
   try {
-    const { title, description, isComplete, user_id } = req.body;
+    const { title, description, isComplete } = req.body;
 
-    //title
+        // if (title === null || title === "" || title === undefined)
+    //   return res.status(400).json({
+    //     Message:
+    //       "El TITULO no puede contener parametros Nulos,Vacíos o Indefinidos",
+    //   });
+
+      //isComplete
+    // if (typeof isComplete !== "boolean") {
+    //   return res
+    //     .status(400)
+    //     .json({ Message: "El valor tiene que ser Boolean" });
+    // }
+  
     const titleExiste = await Task.findOne({ where: { title } });
     if (titleExiste) {
       return res
@@ -14,27 +27,15 @@ export const taskCreate = async (req, res) => {
         .json({ Message: "No pueden haber dos titulos iguales" });
     }
 
-    if (title === null || title === "" || title === undefined)
-      return res.status(400).json({
-        Message:
-          "El TITULO no puede contener parametros Nulos,Vacíos o Indefinidos",
-      });
-
-      //isComplete
-    if (typeof isComplete !== "boolean") {
-      return res
-        .status(400)
-        .json({ Message: "El valor tiene que ser Boolean" });
-    }
-
-    const task = await Task.create({ title, description, isComplete, user_id });
+    const task = await Task.create(req.body);
     if (task) {
       return res
         .status(200)
-        .json({ Message: "Se pudo crear el personaje", task });
+        .json({ Message: "Se pudo crear la TASK", task });
     }
   } catch (error) {
-    Message: "Se ha ingresado al CATCH";
+    return res.status(500).json({Message: "Se ha ingresado al CATCH"});
+    console.log(error);
   }
 };
 //
@@ -44,31 +45,22 @@ export const taskCreate = async (req, res) => {
 export const getTask = async (req, res) => {
   try {
     const task = await Task.findAll({
-      attributes: {
-        exclude: ["user_id"],
-      },
-
-      include: [
-        {
-          model: User,
-          attributes: {
-            exclude: ["password"],
-          },
-        },
-      ],
+      include:[{
+        model: Profile
+      }]
     });
 
-    if (!task) {
-      return res.status(404).json({ Message: "No se pudo encontrar al TASK" });
-    }
-
-    if (task) {
+        if (task) {
       return res
         .status(200)
         .json({ Message: "Se obtuvieron todos las TASK", task });
     }
 
-    return res.status(400).json({ Message: " No se pudo OBTENER la TASK" });
+
+    if (!task) {
+      return res.status(404).json({ Message: "No se pudo encontrar al TASK" });
+    }
+
   } catch (error) {
     Message: "Error al OBTENER la TASK por parte del servidor";
   }

@@ -2,27 +2,33 @@
   "dependencies": {
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "express-validator": "^7.2.1",
     "mysql2": "^3.14.3",
     "sequelize": "^6.37.7"
   },
-  "name": "vueltaclases",
+  "name": "asdasd",
   "version": "1.0.0",
   "main": "app.js",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
     "dev": "node --watch app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Etrli/crud-tasks-farina-eric.git"
+    "url": "git+https://github.com/developeric/aaaaaa.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Etrli/crud-tasks-farina-eric/issues"
+    "url": "https://github.com/developeric/aaaaaa/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/Etrli/crud-tasks-farina-eric#readme",
   "description": "��#\u0000 \u0000a\u0000a\u0000a\u0000a\u0000a\u0000a\u0000\r\u0000 \u0000#\u0000 \u0000a\u0000a\u0000a\u0000a\u0000a\u0000a\u0000\r\u0000 \u0000"
+=======
+  "homepage": "https://github.com/developeric/aaaaaa#readme",
+  "devDependencies": {},
+  "description": ""
+>>>>>>> develop
 }
