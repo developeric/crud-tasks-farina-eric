@@ -90,7 +90,7 @@ export const getProfileByPK = async (req, res) => {
 
 //ActualizarProfile
 export const updateProfile = async (req, res) => {
-  const profile = User.update(req.body, { where: { id: req.params.id } });
+  const profile = Profile.update(req.body, { where: { id: req.params.id } });
 
   if (profile) {
     return res.status(201).json({ Message: "Se actualizó el PROFILE" });
