@@ -19,7 +19,7 @@ export const startDB = async()=>{
     try {
         await sequelize.authenticate(),
         console.log("Se pudo autenticar")
-        await sequelize.sync({force:true});
+        await sequelize.sync();
     } catch (error) {Message:"Error al autenticar el servidor"
     }
 }
