@@ -4,7 +4,7 @@ import { Profile } from "../../models/profile.model.js";
 export const createProfileValidator = [
   body("real_name")
     .custom(async (value) => {
-      const existente = await User.findOne({ where: { real_name: value } });
+      const existente = await Profile.findOne({ where: { real_name: value } });
       if (existente) {
         throw new Error("Este REAL_NAME ya esta en uso");
       }

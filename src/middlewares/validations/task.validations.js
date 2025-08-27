@@ -5,7 +5,7 @@ import { Task } from "../../models/task.model.js";
 export const createTaskValidator = [
   body("title")
       .custom(async (value) => {
-        const existente = await User.findOne({ where: { title: value } });
+        const existente = await Task.findOne({ where: { title: value } });
         if (existente) {
           throw new Error("Este TITLE ya esta en uso");
         }
@@ -33,8 +33,8 @@ export const updateTaskValidator = [
     .isInt()
     .withMessage("Tiene que ser un entero")
     .custom(async (value) => {
-      const user = await Task.findByPk(value);
-      if (!user) throw new Error("El user no se ha podido encontrar");
+      const task = await Task.findByPk(value);
+      if (!task) throw new Error("El user no se ha podido encontrar");
     }),
   body("title")
     .optional()

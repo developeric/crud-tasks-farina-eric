@@ -1,18 +1,16 @@
 import { where } from "sequelize";
 import { Profile } from "../models/profile.model.js";
 import { User } from "../models/user.model.js";
+import { matchedData } from "express-validator";
 
 //crear Profile
 export const createProfile = async (req, res) => {
   try {
     const { real_name, description, age } = req.body;
+    const datosValidados = matchedData(req)
 
-    // if (real_name === null || real_name === "" || real_name === undefined)
-    //   return res.status(400).json({
-    //     Message:
-    //       "El NOMBRE no puede contener parametros Nulos,Vacíos o Indefinidos",
-    //   });
-    const newProfile = await Profile.create(req.body);
+
+    const newProfile = await Profile.create(datosValidados);
     const profileReturn = await Profile.findByPk(newProfile.id, {
       include: [
         {
